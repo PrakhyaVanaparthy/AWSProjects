@@ -1,0 +1,25 @@
+Parameters:
+    myVPC :
+        Description: Please enter the IP range (CIDR notation) for this VPC
+        Type: String
+        Default: vpc-0d75bb1d032f132d8
+Resources:    
+    InstanceSecurityGroup:
+      Type: AWS::EC2::SecurityGroup
+      Properties:
+          GroupDescription: Allow http to client host
+          VpcId:
+             Ref: myVPC
+          SecurityGroupIngress:
+          - IpProtocol: tcp
+            FromPort: 80
+            ToPort: 80
+            CidrIp: 0.0.0.0/0
+          SecurityGroupEgress:
+          - IpProtocol: tcp
+            FromPort: 0
+            ToPort: 65535
+            CidrIp: 0.0.0.0/0
+          Tags: 
+          - Key: Name 
+            Value: TestEC2SecurityGroup
